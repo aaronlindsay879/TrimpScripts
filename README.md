@@ -11,4 +11,14 @@ Currently Notifies you when you are at Map At Zone. Browser notifications must b
 A noise will also be played when you reach it. 
 When you change your MapAtZone settings, you will be notified again.
 
-Currently there is no notification after you are done mapping and return to the map chamber. 
+Will notify you again when done with farming items or 10 stacks for maps
+
+
+----Trimps Scripts----
+My personal script for filler runs with AT. Script is written for running to Zone 515 with
+my settings. I cannot guarantee everything will work to perfection if not using my AT settings.
+Use at your own risk.
+
+----wo Raiding----
+This is the script I run for dailies. Same disclaimer as above. I eventually plan on combining the
+two scripts into one.
