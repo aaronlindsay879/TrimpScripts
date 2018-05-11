@@ -42,12 +42,10 @@ setInterval(
 		if (game.options.menu.mapAtZone.enabled == 1 && (game.global.world == 510 || game.global.world == 506 || game.global.world == 495)){
 			if (getPageSetting('AutoMaps') == 1 && game.global.mapsActive && !prestiged){
 				toggleAutoMaps();
-				repeatClicked();
-				while (game.options.menu.repeatUntil.enabled!=2){
-					toggleSetting('repeatUntil');
-				}
+				game.options.menu.repeatUntil.enabled = 2;
+				game.global.repeatMap = false;
 				setTimeout(function(){
-				repeatClicked();
+				game.global.repeatMap = true;
 				game.global.world == 495 ? plusSixPres():plusFivePres();
 				buyMap();
 				selectMap(game.global.mapsOwnedArray[game.global.mapsOwnedArray.length-1].id);
