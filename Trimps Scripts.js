@@ -7,6 +7,7 @@ autoTrimpSettings["AutoStartDaily"].enabled = false;
 
 setInterval(
 	function(){
+		//Windstacking stance dancing
 		if(game.global.world>=80) {
 			if( getEmpowerment() != "Wind" || game.global.mapsActive || game.empowerments.Wind.currentDebuffPower==200) {
 				if (!(game.global.mapsActive && game.global.mapsOwnedArray[getMapIndex(game.global.currentMapId)].bonus == "lmc"))
@@ -26,6 +27,7 @@ setInterval(
 				MODULES["maps"].enoughDamageCutoff = 160;
 			}
 		}
+		//Misc Features
 		if (game.global.soldierHealth == 0 && !(game.global.spireActive || (game.global.mapsActive && getCurrentMapObject().location == "Void") || game.global.preMapsActive)) {
 			fightManual();
 			buyArmors();
@@ -39,6 +41,7 @@ setInterval(
 		if (game.global.world == autoTrimpSettings["VoidMaps"].value && game.global.lastClearedCell >= 80 && getPageSetting('AutoMaps') == 0){
 			toggleAutoMaps();
 		}
+		//Raiding logic
 		if (game.options.menu.mapAtZone.enabled == 1 && (game.global.world == 510 || game.global.world == 506 || game.global.world == 495)){
 			if (getPageSetting('AutoMaps') == 1 && game.global.mapsActive && !prestiged){
 				toggleAutoMaps();
@@ -65,8 +68,7 @@ setInterval(
 			prestiged = false;
 		}
 		
-		
-		//AutoAllocate Looting II
+		//Resetting values
 		if (game.global.world <= 10){
 			autoTrimpSettings["BuyWeapons"].enabled = false;
 		}
@@ -78,7 +80,7 @@ setInterval(
 			autoTrimpSettings["BuyWeapons"].enabled = true;
 			autoTrimpSettings["AutoMaps"].value = 1;
 		}
-		
+		//AutoAllocate Looting II
 		if (!perked){
 			viewPortalUpgrades();
 			game.global.lastCustomAmt = 100000;
