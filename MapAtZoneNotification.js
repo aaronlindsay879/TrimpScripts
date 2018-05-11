@@ -1,13 +1,15 @@
 var notified = false;
+var enteredMap = false;
+var enteredMapChamber = false;
 var notificationZone = game.options.menu.mapAtZone.setZone;
 
 setInterval(
 	function(){
 		if (!notified && game.global.world == game.options.menu.mapAtZone.setZone)
 		{
-			notifyMe();
+			notifyMe("At MapAtZone");
 			beep();
-			notified = true;
+      notified = true;
 		}
 		if (game.options.menu.mapAtZone.setZone != notificationZone)
 		{
@@ -16,17 +18,29 @@ setInterval(
 				notified = false;
 			}
 			notificationZone = game.options.menu.mapAtZone.setZone;
-		}
+    }
+
+    if ( game.global.preMapsActive && enteredMap )
+    {
+      notifyMe("Done Mapping");
+      beep();
+      enteredMap = false;
+    }
+    if (game.global.mapsActive && game.global.repeatMap == true && !(game.global.mapsOwnedArray[getMapIndex(game.global.currentMapId)].name.indexOf("Bionic") == 0 
+      && game.global.mapGridArray[99].special=="roboTrimp"))
+    {
+      enteredMap = true;
+    }
+
 	},1000);
 	
-  function notifyMe() {
+  function notifyMe(message) {
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
     }
     else if (Notification.permission === "granted") {
-      var notification = new Notification("At MapAtZone");
+      var notification = new Notification(message);
     }
-  
     else if (Notification.permission !== 'denied') {
       Notification.requestPermission(function (permission) {
         if(!('permission' in Notification)) {
