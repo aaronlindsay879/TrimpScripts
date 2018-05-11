@@ -25,10 +25,14 @@ setInterval(
       beep();
       enteredMap = false;
     }
-    if (game.global.mapsActive && game.global.repeatMap == true && !(game.global.mapsOwnedArray[getMapIndex(game.global.currentMapId)].name.indexOf("Bionic") == 0 
+    if (game.global.mapsActive && (game.global.repeatMap == true || game.options.menu.repeatVoids.enabled == 1) && !(game.global.mapsOwnedArray[getMapIndex(game.global.currentMapId)].name.indexOf("Bionic") == 0 
       && game.global.mapGridArray[99].special=="roboTrimp"))
     {
       enteredMap = true;
+    }
+    else
+    {
+      enteredMap = false;
     }
 
 	},1000);
