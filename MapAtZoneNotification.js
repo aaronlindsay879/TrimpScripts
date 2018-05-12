@@ -1,6 +1,7 @@
 var notified = false;
 var enteredMap = false;
 var notificationZone = game.options.menu.mapAtZone.setZone;
+notifyMe("Notifications Active");
 
 setInterval(
 	function(){

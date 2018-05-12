@@ -59,7 +59,8 @@ setInterval(
 			}
 			notificationZone = game.options.menu.mapAtZone.setZone;
 		}
-		if ( game.global.preMapsActive && enteredMap )
+
+	if ( game.global.preMapsActive && enteredMap && notified )
     {
       notifyMe("Done Mapping");
       beep();
@@ -69,6 +70,10 @@ setInterval(
       && game.global.mapGridArray[99].special=="roboTrimp"))
     {
       enteredMap = true;
+    }
+    else
+    {
+      enteredMap = false;
     }
 		
 		//Resetting values			
