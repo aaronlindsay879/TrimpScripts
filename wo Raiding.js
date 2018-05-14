@@ -34,10 +34,10 @@ setInterval(
 			fightManual();
 			buyArmors();
 		}
-		if (game.global.antiStacks != 45 && game.global.realBreedTime >= 45000 && !game.global.SpireActive) {
+		if (game.global.antiStacks != 45 && game.global.lastBreedTime >= 45000 && !game.global.SpireActive) {
 			forceAbandonTrimps();
         }
-		if ((needPrestige || !enoughDamage) && game.global.world>=200 && (getEmpowerment() == "Ice" || (getEmpowerment() == "Wind" && game.global.realBreedTime >= 45000)) && !game.global.mapsActive && game.global.mapBonus != 10 && game.global.world!=game.options.menu.mapAtZone.setZone) {
+		if ((needPrestige || !enoughDamage) && game.global.world>=200 && (getEmpowerment() == "Ice" || (getEmpowerment() == "Wind" && game.global.lastBreedTime >= 45000)) && !game.global.mapsActive && game.global.mapBonus != 10 && game.global.world!=game.options.menu.mapAtZone.setZone) {
 			forceAbandonTrimps();
         }
 		if (game.global.world == autoTrimpSettings["VoidMaps"].value && game.global.lastClearedCell >= 80 && getPageSetting('AutoMaps') == 0){
@@ -47,7 +47,7 @@ setInterval(
 		//Notification script
 		if (!notified && game.global.world == game.options.menu.mapAtZone.setZone)
 		{
-			notifyMe();
+			notifyMe("At MapAtZone");
 			beep();
 			notified = true;
 		}
