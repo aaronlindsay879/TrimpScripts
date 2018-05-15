@@ -13,6 +13,8 @@ When you change your MapAtZone settings, you will be notified again.
 
 Will notify you again when done with farming items or 10 stacks for maps
 
+**EASY INSTALL click here: https://raw.githubusercontent.com/slivermasterz/TrimpScripts/master/notificationInstall.js** (the Monkeys will detect this and prompt you to install it)
+
 
 ----Trimps Scripts----
 My personal script for filler runs with AT. Script is written for running to Zone 515 with
