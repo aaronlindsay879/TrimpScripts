@@ -2,7 +2,7 @@
 // @name         MapAtZoneNotifications
 // @namespace    https://github.com/slivermasterz/TrimpScripts
 // @version      1.0
-// @updateURL    https://github.com/slivermasterz/TrimpsScripts/.notificationInstall.js
+// @updateURL    https://github.com/slivermasterz/TrimpsScripts/notificationInstall.user.js
 // @description  Notify you when at MapAtZone
 // @author       Sliverz
 // @include        *trimps.github.io*
