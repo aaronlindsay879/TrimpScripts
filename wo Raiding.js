@@ -1,5 +1,6 @@
 var perked = false;
 enableDebug = false;
+userscriptOn = false;
 var notified = false;
 var enteredMap = false;
 var notificationZone = game.options.menu.mapAtZone.setZone;

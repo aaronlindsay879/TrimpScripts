@@ -1,5 +1,6 @@
 var perked = false;
 var prestiged = false;
+var bwRaiding = 0;
 var resetGenes = false;
 enableDebug = false;
 userscriptOn = false;
@@ -56,22 +57,23 @@ setInterval(
         //Raiding logic
         if (game.global.world === game.options.menu.mapAtZone.setZone && game.options.menu.mapAtZone.enabled === 1) {
             if (getPageSetting('AutoMaps') === 1 && game.global.mapsActive && !prestiged) {
-                toggleAutoMaps();
+                autoTrimpSettings["AutoMaps"].value = 0;
                 game.options.menu.repeatUntil.enabled = 2;
                 game.global.repeatMap = false;
             }
             else if (getPageSetting('AutoMaps') === 0 && game.global.preMapsActive && !prestiged) {
                 game.global.repeatMap = true;
-                plusPres();
+                (game.global.world % 10 === 5) ? bestGear():plusPres();
                 buyMap();
                 selectMap(game.global.mapsOwnedArray[game.global.mapsOwnedArray.length - 1].id);
                 runMap();
                 prestiged = true;
+                bwRaiding = bwRaiding === 0 ? 1 : -1;
             }
             else if (prestiged && game.global.preMapsActive) {
                 recycleMap();
-                toggleAutoMaps();
                 game.options.menu.mapAtZone.enabled = 0;
+                autoTrimpSettings["AutoMaps"].value = bwRaiding > -1 ? 0 : 1;
             }
         }
         if (game.global.world === game.options.menu.mapAtZone.setZone + 1){
@@ -130,6 +132,20 @@ function plusPres(){
     document.getElementById("sizeAdvMapsRange").value = 9;
     document.getElementById('advPerfectCheckbox').checked = false;
     updateMapCost();
+}
+
+function bestGear() {
+    document.getElementById("biomeAdvMapsSelect").value = "Random";
+    document.getElementById('advSpecialSelect').value = 0;
+    document.getElementById("lootAdvMapsRange").value = 0;
+    document.getElementById("difficultyAdvMapsRange").value = 0;
+    document.getElementById("sizeAdvMapsRange").value = 9;
+    document.getElementById('advPerfectCheckbox').checked = false;
+    document.getElementById('advExtraLevelSelect').value = 10;
+    while (updateMapCost(true) > game.resources.fragments.owned)
+    {
+        document.getElementById('advExtraLevelSelect').value--;
+    }
 }
 
 
