@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         MapAtZoneNotifications
 // @namespace    https://github.com/slivermasterz/TrimpScripts
-// @version      2.2-Sliverz
-// @updateURL    https://github.com/slivermasterz/TrimpsScripts/notificationInstall.js
+// @version      1.0
+// @updateURL    https://github.com/slivermasterz/TrimpsScripts/.notificationInstall.js
 // @description  Notify you when at MapAtZone
 // @author       Sliverz
 // @include        *trimps.github.io*
 // @include        *kongregate.com/games/GreenSatellite/trimps
+// @connect      self
 // @grant        none
 // ==/UserScript==
 
