@@ -26,7 +26,7 @@ function beep() {
 
 setInterval(
 	function() {
-        if (!notified && game.global.world === game.options.menu.mapAtZone.setZone) {
+        if (!notified && game.global.world === game.options.menu.mapAtZone.setZone && game.global.options.menu.mapAtZone.enabled) {
             notifyMe("At MapAtZone");
             beep();
             notified = true;
