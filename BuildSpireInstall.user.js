@@ -2,7 +2,7 @@
 // @name         SpireBuilder
 // @namespace    https://github.com/slivermasterz/TrimpScripts
 // @version      1.0
-// @updateURL    https://github.com/slivermasterz/TrimpsScripts/BuildSpireInstall.user.js
+// @updateURL    https://slivermasterz.github.io/TrimpScripts/BuildSpireInstall.user.js
 // @description  Adds Import Spire Build
 // @author       Sliverz
 // @include        *trimps.github.io*
