@@ -4,18 +4,18 @@ String.prototype.replaceAll = function(search, replacement) {
 };
 
 var tdStringCode = (string) => {
-	s = new String(string);
+	let s = new String(string);
 	let index = s.indexOf("+",0);
 	s = s.slice(0,index);
 	let length = s.length;
-	s=s.replaceAll("0","playerSpire.selectTrap(\"Sell\"); playerSpire.buildTrap(X);");
-	s=s.replaceAll("1","playerSpire.selectTrap(\"Fire\"); playerSpire.buildTrap(X);");
-	s=s.replaceAll("2","playerSpire.selectTrap(\"Frost\"); playerSpire.buildTrap(X);");
-	s=s.replaceAll("3","playerSpire.selectTrap(\"Poison\"); playerSpire.buildTrap(X);");
-	s=s.replaceAll("4","playerSpire.selectTrap(\"Lightning\"); playerSpire.buildTrap(X);");
-	s=s.replaceAll("5","playerSpire.selectTrap(\"Strength\"); playerSpire.buildTrap(X);");
-	s=s.replaceAll("6","playerSpire.selectTrap(\"Condenser\"); playerSpire.buildTrap(X);");
-	s=s.replaceAll("7","playerSpire.selectTrap(\"Knowledge\"); playerSpire.buildTrap(X);");
+	s=s.replaceAll("0","playerSpire.selectTrap('sell'); playerSpire.buildTrap(X);");
+	s=s.replaceAll("1","playerSpire.selectTrap('Fire'); playerSpire.buildTrap(X);");
+	s=s.replaceAll("2","playerSpire.selectTrap('Frost'); playerSpire.buildTrap(X);");
+	s=s.replaceAll("3","playerSpire.selectTrap('Poison'); playerSpire.buildTrap(X);");
+	s=s.replaceAll("4","playerSpire.selectTrap('Lightning'); playerSpire.buildTrap(X);");
+	s=s.replaceAll("5","playerSpire.selectTrap('Strength'); playerSpire.buildTrap(X);");
+	s=s.replaceAll("6","playerSpire.selectTrap('Condenser'); playerSpire.buildTrap(X);");
+	s=s.replaceAll("7","playerSpire.selectTrap('Knowledge'); playerSpire.buildTrap(X);");
 	for (let i = 0; i < length; i++) {
 		s = s.replace("X",i);
 	}
