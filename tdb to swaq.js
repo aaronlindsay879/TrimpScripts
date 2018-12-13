@@ -25,7 +25,7 @@ var upgrades = (string) => {
 
 function importLayout(string) {
   var oldSelect = selectedTrap;
-  char c = string.charAt(0);
+  let c = string.charAt(0);
   if ( c == 'F'|| c == 'Z' || c == 'P' || c == 'L' || c == 'S' || c == 'C' || c == 'K' || c == '_')
   {
 	  let newString = tdString(string);
