@@ -3,8 +3,8 @@ trapIndexs = ["","Fire","Frost","Poison","Lightning","Strength","Condenser","Kno
 var tdStringCode = (string) => {
 	saveLayoutStringTo(string,-1);
     loadLayoutAtSlot(-1);
-    playerSpire.lootAvg.accumulator = 0;
-    playerSpire.lootAvg.average = 0;
+    //playerSpire.lootAvg.accumulator = 0;
+    //playerSpire.lootAvg.average = 0;
     playerSpire.updateRsPs();
 };
 
