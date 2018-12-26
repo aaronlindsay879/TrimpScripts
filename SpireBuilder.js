@@ -5,7 +5,6 @@ var tdStringCode = (string) => {
     loadLayoutAtSlot(-1);
     playerSpire.lootAvg.accumulator = 0;
     playerSpire.lootAvg.average = 0;
-    playerSpire.lootAvg.lastAvg = [];
     playerSpire.updateRsPs();
 };
 
