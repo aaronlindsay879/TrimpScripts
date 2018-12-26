@@ -1,24 +1,46 @@
 trapIndexs = ["","Fire","Frost","Poison","Lightning","Strength","Condenser","Knowledge"];
 
 var tdStringCode = (string) => {
-	let s = new String(string);
-	let index = s.indexOf("+",0);
-	s = s.slice(0,index);
-	let length = s.length;
+	saveLayoutStringTo(string,-1);
+    loadLayoutAtSlot(-1);
+    playerSpire.lootAvg.accumulator = 0;
+    playerSpire.lootAvg.average = 0;
+    playerSpire.lootAvg.lastAvg = [];
+    playerSpire.updateRsPs();
+};
+
+/**
+ * Saves a layout to game
+ * @param string swaq td layout String
+ * @param slot layout slot to save to
+ */
+var saveLayoutStringTo = (string,slot) => {
+    let s = new String(string);
+    let index = s.indexOf("+",0);
+    s = s.slice(0,index);
+    let length = s.length;
+
+    if (s.length > 200) return;
 
     var saveLayout = [];
-	for (let i = 0; i < length; i++) {
-		saveLayout.push(trapIndexs[s.charAt(i)]);
-	}
-    playerSpire['savedLayout' + -1] = saveLayout;
+    for (let i = 0; i < length; i++) {
+        saveLayout.push(trapIndexs[s.charAt(i)]);
+    }
+    playerSpire['savedLayout' + slot] = saveLayout;
+};
 
-    if ((playerSpire.runestones + playerSpire.getCurrentLayoutPrice()) < playerSpire.getSavedLayoutPrice(-1)) return false;
+var loadLayoutAtSlot = (slot) => {
+    var saveLayout = playerSpire["savedLayout" + slot];
+    if ((playerSpire.runestones + playerSpire.getCurrentLayoutPrice()) < playerSpire.getSavedLayoutPrice(slot)) return false;
     playerSpire.resetTraps();
     for (var x = 0; x < saveLayout.length; x++){
         if (!saveLayout[x]) continue;
         playerSpire.buildTrap(x, saveLayout[x]);
     }
+    return true;
 };
+
+var loadLayout
 
 function getClipboardText(ev) {
   return ev.clipboardData.getData("text/plain").replace(/\s/g, '');
@@ -72,7 +94,13 @@ playerSpire.drawInfo = function() {
         infoHtml += this.getUpgradesHtml();
         infoHtml += "</div>"; //playerSpireUpgradesArea
         elem.innerHTML = infoHtml;
-    }
+    };
 
 
+/*
+var tdQueue = [];
 
+var addLayout = (string) => {
+    saveLayoutStringTo(string,-1);
+};
+*/
