@@ -40,7 +40,6 @@ var loadLayoutAtSlot = (slot) => {
     return true;
 };
 
-var loadLayout
 
 function getClipboardText(ev) {
   return ev.clipboardData.getData("text/plain").replace(/\s/g, '');
@@ -96,11 +95,76 @@ playerSpire.drawInfo = function() {
         elem.innerHTML = infoHtml;
     };
 
+//SpireTD UI Addons
 
-/*
-var tdQueue = [];
+var threatDebug = false;
+var SpireBuilderUI = false;
 
-var addLayout = (string) => {
-    saveLayoutStringTo(string,-1);
+playerSpire.getDifficultyHtml = function() {
+    var text = ((this.smallMode) ? "T: " : "Threat: ") + prettify(Math.floor(this.difficulty));
+    var nextCost = (this.rowsAllowed < 20 && this.tutorialStep > 1) ? " / " + prettify(100 * (this.rowsAllowed + 1)) : "";
+    return text + nextCost + " " + (threatDebug ? playerSpire.difficultyHidden.toFixed(2) + " " + playerSpire.killedSinceLeak : "");
 };
-*/
+
+playerSpire.updateRunestones = function(){
+    var elem = document.getElementById('playerSpireRunestones');
+    if (elem)
+        elem.innerHTML = prettify(this.runestones) + " " + (SpireBuilderUI ? prettify(this.runestones + playerSpire.getCurrentLayoutPrice() : ""));
+};
+
+
+playerSpire.updateRsPs = function(){
+    var elem = document.getElementById('RsPs');
+    if (elem)
+        elem.innerHTML = prettify(this.getRsPs()) + " " + (SpireBuilderUI ? prettify(this.getRsPs()*3600) : "");
+};
+
+playerSpire.upgradeTooltip = function(which, event){
+    var trap = playerSpireTraps[which];
+    if (!trap.upgrades || trap.upgrades.length < trap.level) return;
+    var upgrade = trap.upgrades[trap.level - 1];
+    var text = upgrade.description;
+    var title = which + ((trap.isTower) ? " Tower " : " Trap ") + romanNumeral(trap.level + 1);
+    var cost = "<span style='color: ";
+    cost += (this.runestones >= upgrade.cost) ? "green" : "red";
+    cost += "'>" + prettify(upgrade.cost) + " Runestones";
+    if (upgrade.cost > this.runestones) cost += " (" + calculateTimeToMax(null, this.lootAvg.average, (upgrade.cost - this.runestones)) + ")" + (SpireBuilderUI ? " (" + calculateTimeToMax(null, this.lootAvg.average, (upgrade.cost - this.runestones - this.getCurrentLayoutPrice())) +")" : "");
+    else{
+        var costPct = (upgrade.cost / this.runestones) * 100;
+        if (costPct < 0.01) costPct = 0;
+        cost += " (" + prettify(costPct) + "%)";
+    }
+    cost += "</span>";
+    if (upgrade.unlockAt != -1)
+        cost += ", <span style='color: " + ((game.global.highestLevelCleared + 1 >= upgrade.unlockAt) ? "green" : "red") + "'>Reach Z" + upgrade.unlockAt + "</span>";
+    tooltip(title, 'customText', event, text, cost);
+    tooltipUpdateFunction = function(){playerSpire.upgradeTooltip(which, event)};
+};
+
+playerSpire.trapTooltip = function(which, event){
+        if (which == "sell"){
+            tooltip("Sell Trap/Tower", 'customText', event, "Sell a Trap or Tower! You'll get back 100% of what you spent on the last Trap or Tower of that type.<br/><br/>(Hotkey 0 or ')")
+            return;
+        }
+        if (which == "shiftUp"){
+            tooltip("Shift Up", 'customText', event, "Shift your Traps and Towers up one cell!<br/><br/>Click this to select Shift Up Mode, then click a Trap or Tower in your Spire. The Trap/Tower you select and all Traps/Towers after it will shift up one cell until the first empty space is hit.<br/><br/>If there is no empty space, your last Trap/Tower will be sold.")
+            return;
+        }
+        if (which == "shiftDown"){
+            tooltip("Shift Down", 'customText', event, "Shift your Traps and Towers down one cell!<br/><br/>Click this to select Shift Down Mode, then click a Trap or Tower in your Spire. The Trap/Tower you select and all Traps/Towers before it will shift down one cell until the first empty space is hit.<br/><br/>If there is no empty space, your first Trap/Tower will be sold.")
+            return;
+        }
+        var trapText = playerSpireTraps[which].isTower ? " Tower" : " Trap";
+        var cost = this.getTrapCost(which);
+        var costText = (cost > this.runestones) ? "<span style='color: red'>" : "<span style='color: green'>";
+        costText += prettify(cost) + " Runestones";
+        if (cost > this.runestones) costText += " (" + calculateTimeToMax(null, this.lootAvg.average, (cost - this.runestones)) + ")" + (SpireBuilderUI ? " (" + calculateTimeToMax(null, this.lootAvg.average, (cost - this.runestones - this.getCurrentLayoutPrice())) +")" : "");
+        else{
+            var costPct = (cost / this.runestones) * 100;
+            if (costPct < 0.01) costPct = 0;
+            costText += " (" + prettify(costPct) + "%)";
+        } 
+        costText += "</span>";
+        tooltip(which + trapText, 'customText', event, playerSpireTraps[which].description, costText);
+        tooltipUpdateFunction = function(){playerSpire.trapTooltip(which, event)};
+    }
