@@ -109,14 +109,14 @@ playerSpire.getDifficultyHtml = function() {
 playerSpire.updateRunestones = function(){
     var elem = document.getElementById('playerSpireRunestones');
     if (elem)
-        elem.innerHTML = prettify(this.runestones) + " " + (SpireBuilderUI ? prettify(this.runestones + playerSpire.getCurrentLayoutPrice() : ""));
+        elem.innerHTML = prettify(this.runestones) + " " + (SpireBuilderUI ? "Total RS: " + prettify(this.runestones + playerSpire.getCurrentLayoutPrice()) : "");
 };
 
 
 playerSpire.updateRsPs = function(){
     var elem = document.getElementById('RsPs');
     if (elem)
-        elem.innerHTML = prettify(this.getRsPs()) + " " + (SpireBuilderUI ? prettify(this.getRsPs()*3600) : "");
+        elem.innerHTML = prettify(this.getRsPs()) + " " + (SpireBuilderUI ? "Rs/hr: "+prettify(this.getRsPs()*3600) : "");
 };
 
 playerSpire.upgradeTooltip = function(which, event){
