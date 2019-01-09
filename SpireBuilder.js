@@ -98,7 +98,7 @@ playerSpire.drawInfo = function() {
 //SpireTD UI Addons
 
 var threatDebug = false;
-var SpireBuilderUI = false;
+var SpireBuilderUI = true;
 
 playerSpire.getDifficultyHtml = function() {
     var text = ((this.smallMode) ? "T: " : "Threat: ") + prettify(Math.floor(this.difficulty));
