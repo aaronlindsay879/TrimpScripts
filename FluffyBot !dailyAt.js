@@ -8,7 +8,7 @@ function getDailyAt(Month,Day,Year) {
 
 function getDailyAt(Month,Day) {
 	let today = new Date();
-	let date = new Date(today.getUTCFullYear();, Month-1, Day);
+	let date = new Date(today.getUTCFullYear(), Month-1, Day);
 	return getDailyDescription(Date.daysBetween(today,date));
 }
 
