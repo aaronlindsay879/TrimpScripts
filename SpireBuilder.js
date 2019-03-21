@@ -1,4 +1,6 @@
 trapIndexs = ["","Fire","Frost","Poison","Lightning","Strength","Condenser","Knowledge"];
+var toggleExport = false;
+var args = "-n -w 3 --towers";
 
 var tdStringCode = (string) => {
 	saveLayoutStringTo(string,-1);
@@ -40,6 +42,42 @@ var loadLayoutAtSlot = (slot) => {
     return true;
 };
 
+function exportTDB() {
+	if (!toggleExport) return "";
+	let exportString = "";
+	for (let i = 0; i < playerSpire.layout.length; i++)
+		exportString += trapIndexs.indexOf(playerSpire.layout[i].trap.name);
+	exportString += "+" + playerSpireTraps["Fire"].level + playerSpireTraps["Frost"].level + playerSpireTraps["Poison"].level + playerSpireTraps["Lightning"].level + "+" + playerSpire.layout.length/5
+	let core = "--core " + game.heirlooms.rarityNames[game.global.CoreEquipped.rarity].toLocaleLowerCase();
+	for (let x = 0; x < game.global.CoreEquipped.mods.length; x++)
+	{
+		switch (game.global.CoreEquipped.mods[x][0])
+		{
+			case "fireTrap":
+				core += "/fire:" + game.heirlooms.Core.fireTrap.currentBonus;
+				break;
+			case "poisonTrap":
+				core += "/poison:" + game.heirlooms.Core.poisonTrap.currentBonus;
+				break;
+			case "lightningTrap":
+				core += "/lightning:" + game.heirlooms.Core.lightningTrap.currentBonus;
+				break;
+			case "runestones":
+				//core += "runestones" + game.heirlooms.Core.runestones.currentBonus;
+				break;
+			case "strengthEffect":
+				core += "/strength:" + game.heirlooms.Core.strengthEffect.currentBonus;
+				break;
+			case "condenserEffect":
+				core += "/condenser:" + game.heirlooms.Core.condenserEffect.currentBonus;
+				break;
+			default:
+				break;
+		}
+	}
+	return "Spire.exe -b " + (playerSpire.runestones + playerSpire.getCurrentLayoutPrice()) + " " + exportString + " " + core + " " + args;
+}
+
 
 function getClipboardText(ev) {
   return ev.clipboardData.getData("text/plain").replace(/\s/g, '');
@@ -65,7 +103,7 @@ playerSpire.drawInfo = function() {
         infoHtml += "<div class='spireControlBoxDbl'><div onclick='playerSpire.presetTooltip(1)'>Layout 1</div><div onclick='playerSpire.presetTooltip(2)'>Layout 2</div></div>"
         infoHtml += "<div onclick='playerSpire.selectTrap(\"shiftUp\")' onmouseout='tooltip(\"hide\")' onmouseover='playerSpire.trapTooltip(\"shiftUp\", event)' id='sellTrapBox' class='spireControlBox" + ((this.selectedTrap == "shiftUp") ? " selected" : "") + "'>Shift Up</div>";
         infoHtml += "<div onclick='playerSpire.selectTrap(\"shiftDown\")' onmouseout='tooltip(\"hide\")' onmouseover='playerSpire.trapTooltip(\"shiftDown\", event)' id='sellTrapBox' class='spireControlBox" + ((this.selectedTrap == "shiftDown") ? " selected" : "") + "'>Shift Down</div>";
-		infoHtml += "<input id=exportString placeholder=Import onpaste=tdStringCode(getClipboardText(event))>"
+		infoHtml += "<input id=exportString placeholder=Import/Export onclick=this.value=exportTDB();this.select(); onpaste=tdStringCode(getClipboardText(event));>"
         
         // infoHtml += "<div onclick='playerSpire.resetUpgrades()' class='spireControlBox'>Reset Upgrades</div>";
         // infoHtml += "<div onclick='tooltip(\"confirm\", null, \"update\", \"Are you sure you want to reset EVERYTHING? This includes Floors, upgrades, and runestones!\", \"playerSpire.init()\", \"Reset Spire?\")' class='spireControlBox'>Reset EVERYTHING</div>";
