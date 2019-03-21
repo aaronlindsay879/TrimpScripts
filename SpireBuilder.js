@@ -1,6 +1,6 @@
 trapIndexs = ["","Fire","Frost","Poison","Lightning","Strength","Condenser","Knowledge"];
 var toggleExport = false;
-var args = "-n -w 3 --towers";
+var args = "-n -w 3 --towers --live --online";
 
 var tdStringCode = (string) => {
 	saveLayoutStringTo(string,-1);
