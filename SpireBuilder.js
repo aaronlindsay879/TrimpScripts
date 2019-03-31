@@ -1,6 +1,7 @@
 trapIndexs = ["","Fire","Frost","Poison","Lightning","Strength","Condenser","Knowledge"];
-var toggleExport = false;
 var args = "-n -w 3 --towers --live --online";
+
+if (typeof toggleExport === 'undefined') toggleExport = false;
 
 var tdStringCode = (string) => {
 	saveLayoutStringTo(string,-1);
@@ -41,6 +42,14 @@ var loadLayoutAtSlot = (slot) => {
     }
     return true;
 };
+
+function towerString() {
+	let exportString = "";
+	for (let i = 0; i < playerSpire.layout.length; i++)
+		exportString += trapIndexs.indexOf(playerSpire.layout[i].trap.name);
+	exportString += "+" + playerSpireTraps["Fire"].level + playerSpireTraps["Frost"].level + playerSpireTraps["Poison"].level + playerSpireTraps["Lightning"].level + "+" + playerSpire.layout.length/5
+	return exportString;
+}
 
 function exportTDB() {
 	if (!toggleExport) return "";
