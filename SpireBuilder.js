@@ -72,7 +72,7 @@ function exportTDB() {
 				core += "/lightning:" + game.heirlooms.Core.lightningTrap.currentBonus;
 				break;
 			case "runestones":
-				//core += "runestones" + game.heirlooms.Core.runestones.currentBonus;
+				core += "runestones" + game.heirlooms.Core.runestones.currentBonus;
 				break;
 			case "strengthEffect":
 				core += "/strength:" + game.heirlooms.Core.strengthEffect.currentBonus;
