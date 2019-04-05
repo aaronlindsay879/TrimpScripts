@@ -2,6 +2,7 @@ trapIndexs = ["","Fire","Frost","Poison","Lightning","Strength","Condenser","Kno
 var args = "-n -w 3 --towers --live --online";
 
 if (typeof toggleExport === 'undefined') toggleExport = false;
+if (typeof MinSpireCost === 'undefined') MinSpireCost = 0;
 
 var tdStringCode = (string) => {
 	saveLayoutStringTo(string,-1);
@@ -175,7 +176,7 @@ playerSpire.upgradeTooltip = function(which, event){
     var cost = "<span style='color: ";
     cost += (this.runestones >= upgrade.cost) ? "green" : "red";
     cost += "'>" + prettify(upgrade.cost) + " Runestones";
-    if (upgrade.cost > this.runestones) cost += " (" + calculateTimeToMax(null, this.lootAvg.average, (upgrade.cost - this.runestones)) + ")" + (SpireBuilderUI ? " (" + calculateTimeToMax(null, this.lootAvg.average, (upgrade.cost - this.runestones - this.getCurrentLayoutPrice())) +")" : "");
+    if (upgrade.cost > this.runestones) cost += " (" + calculateTimeToMax(null, this.lootAvg.average, (upgrade.cost - this.runestones)) + ")" + (SpireBuilderUI ? " (" + calculateTimeToMax(null, this.lootAvg.average, (upgrade.cost - this.runestones - this.getCurrentLayoutPrice() + MinSpireCost)) +")" : "");
     else{
         var costPct = (upgrade.cost / this.runestones) * 100;
         if (costPct < 0.01) costPct = 0;
@@ -205,7 +206,7 @@ playerSpire.trapTooltip = function(which, event){
         var cost = this.getTrapCost(which);
         var costText = (cost > this.runestones) ? "<span style='color: red'>" : "<span style='color: green'>";
         costText += prettify(cost) + " Runestones";
-        if (cost > this.runestones) costText += " (" + calculateTimeToMax(null, this.lootAvg.average, (cost - this.runestones)) + ")" + (SpireBuilderUI ? " (" + calculateTimeToMax(null, this.lootAvg.average, (cost - this.runestones - this.getCurrentLayoutPrice())) +")" : "");
+        if (cost > this.runestones) costText += " (" + calculateTimeToMax(null, this.lootAvg.average, (cost - this.runestones)) + ")" + (SpireBuilderUI ? " (" + calculateTimeToMax(null, this.lootAvg.average, (cost - this.runestones - this.getCurrentLayoutPrice() + MinSpireCost)) +")" : "");
         else{
             var costPct = (cost / this.runestones) * 100;
             if (costPct < 0.01) costPct = 0;
