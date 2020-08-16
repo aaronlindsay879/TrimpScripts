@@ -13,6 +13,6 @@
 
 var script = document.createElement('script');
 script.id = 'SpireBuilder-script';
-script.src = 'https://slivermasterz.github.io/TrimpScripts/SpireBuilder.js';
+script.src = 'https://aaronlindsay879.github.io/TrimpScripts/SpireBuilder.js';
 script.setAttribute('crossorigin',"anonymous");
 document.head.appendChild(script);

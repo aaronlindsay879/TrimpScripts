@@ -14,7 +14,7 @@
 var script = document.createElement('script');
 script.id = 'MapAtZoneNotification-script';
 //This can be edited to be your own Github Repository URL.
-script.src = 'https://slivermasterz.github.io/TrimpScripts/MapAtZoneNotification.js';
+script.src = 'https://aaronlindsay879.github.io/TrimpScripts/MapAtZoneNotification.js';
 //script.setAttribute('crossorigin',"use-credentials");
 script.setAttribute('crossorigin',"anonymous");
 document.head.appendChild(script);
